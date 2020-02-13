@@ -3,9 +3,15 @@ package edu.miracosta.cs134.sandiegomusicevents;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.res.AssetManager;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 public class EventDetailsActivity extends AppCompatActivity
 {
@@ -48,6 +54,18 @@ public class EventDetailsActivity extends AppCompatActivity
         eventVenueTextView.setText(venue);
         eventCityTextView.setText(city);
         eventStateTextView.setText("CA");
+
+        AssetManager am = this.getAssets();
+        try
+        {
+            InputStream stream = am.open(selectedEvent.getImageName());
+            Drawable image = Drawable.createFromStream(stream, selectedEvent.getArtist());
+            musicEventImageView.setImageDrawable(image);
+        }
+        catch (IOException e)
+        {
+            Log.e("SD Music Events", "Error Loading " + selectedEvent.getArtist(), e);
+        }
 
     }
 }
