@@ -2,7 +2,9 @@ package edu.miracosta.cs134.sandiegomusicevents;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -31,12 +33,35 @@ public class MainActivity extends AppCompatActivity {
         eventsList.add(new MusicEvent("Carlos Santana", "June 21", "Sunday", "7:00 PM", "North Island Amphitheatre", "Chula Vista"));
         eventsList.add(new MusicEvent("Ozzy Osbourne", "July 21", "Tuesday", "7:30 PM", "North Island Amphitheatre", "Chula Vista"));
 
-        // TODO: Wire up the musicEventsListView
+        // Wire up the musicEventsListView
         mMusicEventsListView = findViewById(R.id.musicEventListView);
-        // TODO: Instantiate a new ListAdapter (MusicEventListAdapter)
+
+        // Instantiate a new ListAdapter (MusicEventListAdapter)
         mMusicEventListAdapter = new MusicEventListAdapter(this, R.layout.event_list_item, eventsList);
-        // TODO: Set the adapter of the list view to the newly instantiated adapter
+
+        // Set the adapter of the list view to the newly instantiated adapter
         mMusicEventsListView.setAdapter(mMusicEventListAdapter);
 
+    }
+
+    public void openEventDetails(View v)
+    {
+        // Extract the "tag"
+        MusicEvent clickedEvent = (MusicEvent) v.getTag();
+
+        // Set up an intent
+        Intent intent = new Intent(this, EventDetailsActivity.class);
+
+        // Fill intent with details about the clicked event
+        intent.putExtra("Artist", clickedEvent.getArtist());
+        intent.putExtra("Date", clickedEvent.getDate());
+        intent.putExtra("Day", clickedEvent.getDay());
+        intent.putExtra("Time", clickedEvent.getTime());
+        intent.putExtra("Venue", clickedEvent.getVenue());
+        intent.putExtra("City", clickedEvent.getCity());
+
+
+        // Go to (startActivity) eventDetails
+        startActivity(intent);
     }
 }

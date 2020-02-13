@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -42,7 +43,7 @@ public class MusicEventListAdapter extends ArrayAdapter<MusicEvent>
 
     // Override
     // Ctrl + o => override menu
-    // Performing inflation
+    // Performing inflation (populating details)
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent)
@@ -52,6 +53,9 @@ public class MusicEventListAdapter extends ArrayAdapter<MusicEvent>
 
         MusicEvent selectedEvent = mMusicEventList.get(position); // the current music event object that is selected (position tells us which is selected)
 
+        // Wire up linear layout
+        LinearLayout musicEventLinearLayout = view.findViewById(R.id.musicEventListLinearLayout);
+
         // Inflate information about artist name and date
         TextView musicEventListTextView = view.findViewById(R.id.musicEventListTextView);
         musicEventListTextView.setText(selectedEvent.getArtist());
@@ -59,7 +63,11 @@ public class MusicEventListAdapter extends ArrayAdapter<MusicEvent>
         TextView musicEventListDateTextView = view.findViewById(R.id.musicEventListDateTextView);
         musicEventListDateTextView.setText(selectedEvent.getDate());
 
+        // Set up linear layout tag (hidden locker) to be selected music event
+        musicEventLinearLayout.setTag(selectedEvent);
+
         ImageView musicEventImageView = view.findViewById(R.id.musicEventListImageView);
+
         AssetManager am = mContext.getAssets();
         try
         {
