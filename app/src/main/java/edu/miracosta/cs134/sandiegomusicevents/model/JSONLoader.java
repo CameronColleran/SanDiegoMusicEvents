@@ -27,8 +27,8 @@ public class JSONLoader {
     public static List<MusicEvent> loadJSONFromAsset(Context context) throws IOException {
         List<MusicEvent> allMusicEvents = new ArrayList<>();
         String json;
-            //TODO: Complete the file name
-            InputStream is = context.getAssets().open("??");
+            //DONE: Complete the file name
+            InputStream is = context.getAssets().open("MusicEvents.json");
             int size = is.available();
             byte[] buffer = new byte[size];
             is.read(buffer);
@@ -37,8 +37,8 @@ public class JSONLoader {
 
         try {
             JSONObject jsonRootObject = new JSONObject(json);
-            //TODO: Complete the name of the root object in the JSON file
-            JSONArray allMusicEventsJSON = jsonRootObject.getJSONArray("??");
+            //DONE: Complete the name of the root object in the JSON file
+            JSONArray allMusicEventsJSON = jsonRootObject.getJSONArray("MusicEvents");
             int numberOfEvents = allMusicEventsJSON.length();
 
             for (int i = 0; i < numberOfEvents; i++) {
@@ -47,6 +47,9 @@ public class JSONLoader {
                 MusicEvent event = new MusicEvent();
 
                 //TODO: Complete the information about the event by parsing the JSON file
+                event.setArtist(musicEventJSON.getString("Artist"));
+                // Skip (for now) some of the fields
+                event.setImageName(musicEventJSON.getString("ImageName"));
 
             allMusicEvents.add(event);
         }
