@@ -16,13 +16,13 @@ import java.io.InputStream;
 public class EventDetailsActivity extends AppCompatActivity
 {
     // Wire up all the text views and one image view
-    private ImageView eventImageView;
     private TextView eventArtistTextView;
     private TextView eventDateDayTextView;
     private TextView eventTimeTextView;
     private TextView eventVenueTextView;
     private TextView eventCityTextView;
     private TextView eventStateTextView;
+    private ImageView eventImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -31,13 +31,13 @@ public class EventDetailsActivity extends AppCompatActivity
         setContentView(R.layout.activity_event_details);
 
         // Wire up the views
-        eventImageView = findViewById(R.id.eventImageView);
         eventArtistTextView = findViewById(R.id.eventArtistTextView);
         eventDateDayTextView = findViewById(R.id.eventDateDayTextView);
         eventTimeTextView = findViewById(R.id.eventTimeTextView);
         eventVenueTextView = findViewById(R.id.eventVenueTextView);
         eventCityTextView = findViewById(R.id.eventCityTextView);
         eventStateTextView = findViewById(R.id.eventStateTextView);
+        eventImageView = findViewById(R.id.eventImageView);
 
         // Extract the intent (from MainActivity)
         Intent intent = getIntent();
@@ -47,7 +47,9 @@ public class EventDetailsActivity extends AppCompatActivity
         String time = intent.getStringExtra("Time");
         String venue = intent.getStringExtra("Venue");
         String city = intent.getStringExtra("City");
+        String imageName = intent.getStringExtra("ImageName");
 
+        // Set text views to intent data
         eventArtistTextView.setText(artist);
         eventDateDayTextView.setText(day + ",  " + date);
         eventTimeTextView.setText(time);
@@ -56,16 +58,28 @@ public class EventDetailsActivity extends AppCompatActivity
         eventStateTextView.setText("CA");
 
         AssetManager am = this.getAssets();
+
+        System.out.println(artist);
+        System.out.println(date);
+        System.out.println(imageName);
+        // TODO: FIX IMAGE BUG FOR EVENT DETAILS!
+
+
         try
         {
-            InputStream stream = am.open(selectedEvent.getImageName());
-            Drawable image = Drawable.createFromStream(stream, selectedEvent.getArtist());
-            musicEventImageView.setImageDrawable(image);
+            InputStream stream = am.open(imageName);
+            Drawable image = Drawable.createFromStream(stream, imageName);
+            eventImageView.setImageDrawable(image);
         }
         catch (IOException e)
         {
-            Log.e("SD Music Events", "Error Loading " + selectedEvent.getArtist(), e);
+            Log.e("SD Music Events", "Error Loading " + artist, e);
         }
+
+
+
+
+
 
     }
 }

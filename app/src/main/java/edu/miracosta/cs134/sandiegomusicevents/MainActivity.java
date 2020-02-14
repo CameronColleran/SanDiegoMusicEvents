@@ -74,6 +74,9 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("Time", clickedEvent.getTime());
         intent.putExtra("Venue", clickedEvent.getVenue());
         intent.putExtra("City", clickedEvent.getCity());
+        intent.putExtra("ImageName", clickedEvent.getImageName());
+        System.out.println(clickedEvent.getArtist());
+        System.out.println(clickedEvent.getImageName());
 
 
         // Go to (startActivity) eventDetails

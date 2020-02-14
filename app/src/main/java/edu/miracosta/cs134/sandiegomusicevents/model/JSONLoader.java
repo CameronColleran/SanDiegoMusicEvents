@@ -48,6 +48,12 @@ public class JSONLoader {
 
                 //TODO: Complete the information about the event by parsing the JSON file
                 event.setArtist(musicEventJSON.getString("Artist"));
+                event.setDate(musicEventJSON.getString("Date"));
+                event.setDay(musicEventJSON.getString("Day"));
+                event.setTime(musicEventJSON.getString("Time"));
+                event.setVenue(musicEventJSON.getString("Venue"));
+                event.setCity(musicEventJSON.getString("City"));
+                event.setState(musicEventJSON.getString("State"));
                 // Skip (for now) some of the fields
                 event.setImageName(musicEventJSON.getString("ImageName"));
 
