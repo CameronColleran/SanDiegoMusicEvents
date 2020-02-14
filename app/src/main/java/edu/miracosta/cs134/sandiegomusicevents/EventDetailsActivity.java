@@ -57,14 +57,8 @@ public class EventDetailsActivity extends AppCompatActivity
         eventCityTextView.setText(city);
         eventStateTextView.setText("CA");
 
+        // Set image view to intent data
         AssetManager am = this.getAssets();
-
-        System.out.println(artist);
-        System.out.println(date);
-        System.out.println(imageName);
-        // TODO: FIX IMAGE BUG FOR EVENT DETAILS!
-
-
         try
         {
             InputStream stream = am.open(imageName);
